@@ -22,7 +22,7 @@ spec:
           - |
               mkdir /app 
               curl -o /app/data_ingest.py https://raw.githubusercontent.com/kusumachalasani/llm-rag-deployment/kruize-ai/examples/pipelines/data_ingest.py  # Download the Python file
-              curl -o /app/requirements.txt https://raw.githubusercontent.com/kusumachalasani/llm-rag-deployment/tree/kruize-ai/examples/pipelines/requirements.txt  # Download the Python file
+              curl -o /app/requirements.txt https://raw.githubusercontent.com/kusumachalasani/llm-rag-deployment/kruize-ai/examples/pipelines/requirements.txt  # Download the Python file
               cd /app
               pip install -r requirements.txt  # Install required dependencies
               python data_ingest.py  # Run the Python file
