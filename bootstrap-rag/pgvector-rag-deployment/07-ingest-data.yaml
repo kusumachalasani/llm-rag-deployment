@@ -17,13 +17,20 @@ spec:
       containers:
       - name: data-ingest
         image: python:3.9  # Using Python base image
+        env:
+          - name: NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
         command: ["/bin/sh", "-c"]
         args:
           - |
-              mkdir /app 
+              mkdir /app
               curl -o /app/data_ingest.py https://raw.githubusercontent.com/kusumachalasani/llm-rag-deployment/kruize-ai/examples/pipelines/data_ingest.py  # Download the Python file
               curl -o /app/requirements.txt https://raw.githubusercontent.com/kusumachalasani/llm-rag-deployment/kruize-ai/examples/pipelines/requirements.txt  # Download the Python file
               cd /app
+              # Update the connection variable in data_ingest.py using the passed namespace
+              sed -i "s/ic-shared-rag-llm/$NAMESPACE/g" data_ingest.py
               pip install -r requirements.txt  # Install required dependencies
               python data_ingest.py  # Run the Python file
       restartPolicy: Never
